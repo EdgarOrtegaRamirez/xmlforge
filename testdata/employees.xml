@@ -1,0 +1,17 @@
+<employees>
+  <employee id="E001">
+    <name>John Smith</name>
+    <department>Engineering</department>
+    <salary>85000</salary>
+  </employee>
+  <employee id="E002">
+    <name>Jane Doe</name>
+    <department>Marketing</department>
+    <salary>72000</salary>
+  </employee>
+  <employee id="E003">
+    <name>Bob Johnson</name>
+    <department>Engineering</department>
+    <salary>92000</salary>
+  </employee>
+</employees>
