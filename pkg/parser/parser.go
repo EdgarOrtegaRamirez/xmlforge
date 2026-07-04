@@ -58,14 +58,14 @@ type Prolog struct {
 
 // Parser parses XML content into a DOM tree.
 type Parser struct {
-	reader    *RuneReader
-	doc       *Document
-	current   *Node
-	stack     []*Node
-	entities  map[string]string
-	lenient   bool
-	line      int
-	col       int
+	reader   *RuneReader
+	doc      *Document
+	current  *Node
+	stack    []*Node
+	entities map[string]string
+	lenient  bool
+	line     int
+	col      int
 }
 
 // Option configures the parser.

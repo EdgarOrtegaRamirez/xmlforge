@@ -9,12 +9,12 @@ import (
 
 // Options configures XML formatting behavior.
 type Options struct {
-	Indent      string // Indentation string (default: "  ")
-	MaxLineLen  int    // Max line length before wrapping (0 = no wrapping)
-	SelfClosing bool   // Use self-closing tags for empty elements
-	SpacesAttr  bool   // Space around attribute equals sign
-	Prolog      bool   // Include XML declaration
-	AttributeWrap bool // Wrap attributes on separate lines when long
+	Indent        string // Indentation string (default: "  ")
+	MaxLineLen    int    // Max line length before wrapping (0 = no wrapping)
+	SelfClosing   bool   // Use self-closing tags for empty elements
+	SpacesAttr    bool   // Space around attribute equals sign
+	Prolog        bool   // Include XML declaration
+	AttributeWrap bool   // Wrap attributes on separate lines when long
 }
 
 // DefaultOptions returns sensible default formatting options.

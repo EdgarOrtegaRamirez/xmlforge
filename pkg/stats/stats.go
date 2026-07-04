@@ -10,17 +10,17 @@ import (
 
 // Stats holds statistics about an XML document.
 type Stats struct {
-	TotalElements    int
-	MaxDepth         int
-	TotalAttributes  int
-	TotalTextNodes   int
-	TotalComments    int
-	TotalCDATA       int
-	TotalPIs         int
-	TotalNamespaces  int
-	ElementCounts    map[string]int
-	AttributeCounts  map[string]int
-	NamespacePrefixes map[string]string
+	TotalElements      int
+	MaxDepth           int
+	TotalAttributes    int
+	TotalTextNodes     int
+	TotalComments      int
+	TotalCDATA         int
+	TotalPIs           int
+	TotalNamespaces    int
+	ElementCounts      map[string]int
+	AttributeCounts    map[string]int
+	NamespacePrefixes  map[string]string
 	AvgChildrenPerNode float64
 	AvgTextLength      float64
 }

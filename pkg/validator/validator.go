@@ -11,8 +11,8 @@ import (
 
 // Error represents a validation error.
 type Error struct {
- Line    int
- Column  int
+	Line    int
+	Column  int
 	Message string
 	Level   string // "error" or "warning"
 }
@@ -29,15 +29,15 @@ type Result struct {
 
 // Rules defines validation rules.
 type Rules struct {
-	RequireRoot       bool     // Require a root element
-	MaxDepth          int      // Maximum nesting depth (0 = unlimited)
-	MaxAttributes     int      // Max attributes per element (0 = unlimited)
-	AllowedElements   []string // If set, only these elements are allowed
-	RequiredElements  []string // Elements that must be present
-	ForbiddenElements []string // Elements that must not be present
-	MaxTextLength     int      // Maximum text content length (0 = unlimited)
-	NoEmptyElements   bool     // Disallow empty elements
-	ValidateNames     bool     // Validate XML name rules
+	RequireRoot       bool                // Require a root element
+	MaxDepth          int                 // Maximum nesting depth (0 = unlimited)
+	MaxAttributes     int                 // Max attributes per element (0 = unlimited)
+	AllowedElements   []string            // If set, only these elements are allowed
+	RequiredElements  []string            // Elements that must be present
+	ForbiddenElements []string            // Elements that must not be present
+	MaxTextLength     int                 // Maximum text content length (0 = unlimited)
+	NoEmptyElements   bool                // Disallow empty elements
+	ValidateNames     bool                // Validate XML name rules
 	RequiredAttrs     map[string][]string // element -> required attribute names
 }
 
@@ -95,10 +95,10 @@ func (v *Validator) validateNode(node *parser.Node, depth int, result *Result) {
 	if v.rules.MaxDepth > 0 && depth > v.rules.MaxDepth {
 		result.Valid = false
 		result.Errors = append(result.Errors, Error{
-			Line:   node.Line,
-			Column: node.Column,
+			Line:    node.Line,
+			Column:  node.Column,
 			Message: fmt.Sprintf("maximum depth %d exceeded at <%s>", v.rules.MaxDepth, node.Name),
-			Level:  "error",
+			Level:   "error",
 		})
 		return
 	}
@@ -107,10 +107,10 @@ func (v *Validator) validateNode(node *parser.Node, depth int, result *Result) {
 	if v.rules.MaxAttributes > 0 && len(node.Attributes) > v.rules.MaxAttributes {
 		result.Valid = false
 		result.Errors = append(result.Errors, Error{
-			Line:   node.Line,
-			Column: node.Column,
+			Line:    node.Line,
+			Column:  node.Column,
 			Message: fmt.Sprintf("element <%s> has %d attributes (max %d)", node.Name, len(node.Attributes), v.rules.MaxAttributes),
-			Level:  "error",
+			Level:   "error",
 		})
 	}
 
@@ -126,10 +126,10 @@ func (v *Validator) validateNode(node *parser.Node, depth int, result *Result) {
 		if !allowed {
 			result.Valid = false
 			result.Errors = append(result.Errors, Error{
-				Line:   node.Line,
-				Column: node.Column,
+				Line:    node.Line,
+				Column:  node.Column,
 				Message: fmt.Sprintf("element <%s> is not allowed", node.Name),
-				Level:  "error",
+				Level:   "error",
 			})
 		}
 	}
@@ -139,10 +139,10 @@ func (v *Validator) validateNode(node *parser.Node, depth int, result *Result) {
 		if name == node.Name {
 			result.Valid = false
 			result.Errors = append(result.Errors, Error{
-				Line:   node.Line,
-				Column: node.Column,
+				Line:    node.Line,
+				Column:  node.Column,
 				Message: fmt.Sprintf("element <%s> is forbidden", node.Name),
-				Level:  "error",
+				Level:   "error",
 			})
 		}
 	}
@@ -150,10 +150,10 @@ func (v *Validator) validateNode(node *parser.Node, depth int, result *Result) {
 	// Check empty elements
 	if v.rules.NoEmptyElements && len(node.Children) == 0 && node.GetText() == "" {
 		result.Errors = append(result.Errors, Error{
-			Line:   node.Line,
-			Column: node.Column,
+			Line:    node.Line,
+			Column:  node.Column,
 			Message: fmt.Sprintf("element <%s> is empty", node.Name),
-			Level:  "warning",
+			Level:   "warning",
 		})
 	}
 
@@ -162,10 +162,10 @@ func (v *Validator) validateNode(node *parser.Node, depth int, result *Result) {
 		text := node.GetText()
 		if len(text) > v.rules.MaxTextLength {
 			result.Errors = append(result.Errors, Error{
-				Line:   node.Line,
-				Column: node.Column,
+				Line:    node.Line,
+				Column:  node.Column,
 				Message: fmt.Sprintf("text content in <%s> exceeds max length %d (got %d)", node.Name, v.rules.MaxTextLength, len(text)),
-				Level:  "warning",
+				Level:   "warning",
 			})
 		}
 	}
@@ -184,10 +184,10 @@ func (v *Validator) validateNode(node *parser.Node, depth int, result *Result) {
 				if !found {
 					result.Valid = false
 					result.Errors = append(result.Errors, Error{
-						Line:   node.Line,
-						Column: node.Column,
+						Line:    node.Line,
+						Column:  node.Column,
 						Message: fmt.Sprintf("element <%s> missing required attribute @%s", node.Name, attrName),
-						Level:  "error",
+						Level:   "error",
 					})
 				}
 			}
@@ -198,10 +198,10 @@ func (v *Validator) validateNode(node *parser.Node, depth int, result *Result) {
 	if v.rules.ValidateNames {
 		if !isValidXMLName(node.Name) {
 			result.Errors = append(result.Errors, Error{
-				Line:   node.Line,
-				Column: node.Column,
+				Line:    node.Line,
+				Column:  node.Column,
 				Message: fmt.Sprintf("invalid XML name: %s", node.Name),
-				Level:  "warning",
+				Level:   "warning",
 			})
 		}
 	}

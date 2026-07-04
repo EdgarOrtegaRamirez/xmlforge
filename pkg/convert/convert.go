@@ -11,10 +11,10 @@ import (
 
 // JSONOptions configures JSON output.
 type JSONOptions struct {
-	Indent     string // JSON indentation (default: "  ")
+	Indent          string // JSON indentation (default: "  ")
 	AttributePrefix string // Prefix for attributes (default: "@")
-	TextKey     string // Key for text content (default: "#text")
-	Compact     bool   // Compact output (no whitespace)
+	TextKey         string // Key for text content (default: "#text")
+	Compact         bool   // Compact output (no whitespace)
 }
 
 // DefaultJSONOptions returns sensible default options.
