@@ -1,5 +1,5 @@
 # Binaries
-xmlforge
+./xmlforge
 *.exe
 *.exe~
 *.dll
